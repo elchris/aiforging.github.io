@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Forging — The counterpoint to vibe coding</title>
+<meta name="description" content="AI Forging: the counterpoint to vibe coding. A test-first, pattern-driven methodology for AI-assisted development — plus an open-source Claude Code plugin.">
+<meta name="author" content="Chris Holland">
+<meta name="keywords" content="AI Forging, vibe coding, AI-assisted development, AI TDD, test-driven development, Claude Code plugin, pattern-driven refactoring">
+<link rel="canonical" href="https://aiforging.dev/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#07060a">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Forging">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://aiforging.dev/">
+<meta property="og:title" content="AI Forging — The counterpoint to vibe coding">
+<meta property="og:description" content="Test-first, pattern-driven refactoring, knowledge that compounds. A methodology — and an open-source Claude Code plugin that implements it.">
+<meta property="og:image" content="https://aiforging.dev/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="AI Forging — Fire, Hammer, Tempering. The counterpoint to vibe coding.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Forging — The counterpoint to vibe coding">
+<meta name="twitter:description" content="A test-first, pattern-driven methodology for AI-assisted development — plus an open-source Claude Code plugin.">
+<meta name="twitter:image" content="https://aiforging.dev/social-preview.png">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://aiforging.dev/#website",
+      "url": "https://aiforging.dev/",
+      "name": "AI Forging",
+      "description": "The counterpoint to vibe coding — a structured methodology for AI-assisted software development.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://aiforging.dev/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://aiforging.dev/#person",
+      "name": "Chris Holland",
+      "url": "https://linkedin.com/in/chrisholland",
+      "sameAs": [
+        "https://linkedin.com/in/chrisholland",
+        "https://github.com/aiforging"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "AI Forging",
+      "operatingSystem": "Claude Code",
+      "applicationCategory": "DeveloperApplication",
+      "softwareVersion": "0.2.0",
+      "url": "https://github.com/aiforging/aiforging",
+      "description": "An open-source Claude Code plugin that runs the AI Forging methodology: test-first development, pattern-driven refactoring, and scalable knowledge capture.",
+      "author": { "@id": "https://aiforging.dev/#person" },
+      "license": "https://opensource.org/licenses/MIT",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --bg0:#07060a; --bg1:#100e18; --card:#0f0a04;
+    --amber:#f59e0b; --amber-bright:#fbbf24; --amber-deep:#d97706; --fire:#dc2626;
+    --text:#e6e9ef; --muted:#94a3b8; --dim:#64748b; --line:rgba(245,158,11,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:linear-gradient(180deg,var(--bg0),var(--bg1));
+    color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .amber{color:var(--amber-bright)}
+  .fire-text{
+    background:linear-gradient(0deg,var(--fire),var(--amber) 45%,var(--amber-bright));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* Nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:rgba(7,6,10,.72);border-bottom:1px solid rgba(245,158,11,.10)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:800;letter-spacing:3px;font-size:18px}
+  .navlinks{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--amber-bright)}
+  .navlinks .ghlink{color:var(--amber-bright);font-weight:600}
+  @media(max-width:640px){.navlinks{display:none}}
+
+  /* Hero */
+  header.hero{position:relative;text-align:center;padding:110px 0 90px;overflow:hidden}
+  header.hero::before{content:"";position:absolute;left:50%;top:-120px;transform:translateX(-50%);
+    width:900px;height:520px;border-radius:50%;
+    background:radial-gradient(ellipse at center,rgba(245,158,11,.14),transparent 68%);pointer-events:none}
+  .kicker{color:var(--dim);letter-spacing:5px;font-size:12px;font-weight:600;text-transform:uppercase}
+  h1{font-size:64px;font-weight:800;letter-spacing:6px;margin:18px 0 6px}
+  .tagline{font-size:22px;font-weight:600;color:var(--text);margin-bottom:22px}
+  .lede{max-width:620px;margin:0 auto 34px;color:var(--muted);font-size:17px}
+  .lede b{color:var(--text);font-weight:600}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;border-radius:28px;font-weight:700;font-size:15px;letter-spacing:.3px;transition:.15s}
+  .btn-primary{background:linear-gradient(90deg,var(--amber-deep),var(--amber));color:#160d02}
+  .btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--amber-bright)}
+  .btn-ghost:hover{border-color:var(--amber);background:rgba(245,158,11,.06)}
+  @media(max-width:640px){h1{font-size:42px;letter-spacing:3px}.tagline{font-size:19px}}
+
+  /* Sections */
+  section{padding:72px 0;border-top:1px solid rgba(245,158,11,.07)}
+  .eyebrow{color:var(--amber);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:34px;font-weight:800;letter-spacing:.5px;margin-bottom:14px}
+  .section-lede{color:var(--muted);max-width:680px;font-size:16px;margin-bottom:38px}
+
+  /* Cards */
+  .grid{display:grid;gap:18px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.grid-3,.grid-2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+  .card h3{font-size:19px;font-weight:800;margin-bottom:8px;letter-spacing:.5px}
+  .card .stage{color:var(--amber-bright);letter-spacing:2px;font-size:13px;font-weight:800;text-transform:uppercase;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .card p+p{margin-top:10px}
+  .card .punch{color:var(--amber);font-size:13px;font-weight:600;margin-top:14px}
+
+  /* Layers */
+  .layer{display:flex;gap:22px;align-items:flex-start;padding:22px 0;border-bottom:1px solid rgba(245,158,11,.08)}
+  .layer:last-child{border-bottom:none}
+  .layer .num{flex:none;width:54px;height:54px;border-radius:12px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:var(--amber-bright);background:var(--card)}
+  .layer h3{font-size:20px;margin-bottom:4px}
+  .layer .role{color:var(--amber);font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+  .layer p{color:var(--muted);font-size:15px;margin-top:6px}
+
+  /* Contrast table */
+  .contrast{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.contrast{grid-template-columns:1fr}}
+  .col{border-radius:14px;padding:26px;border:1px solid var(--line)}
+  .col.vibe{background:rgba(220,38,38,.05);border-color:rgba(220,38,38,.28)}
+  .col.forge{background:rgba(16,185,129,.05);border-color:rgba(16,185,129,.28)}
+  .col h3{font-size:18px;margin-bottom:16px}
+  .col.vibe h3{color:#fca5a5}.col.forge h3{color:#6ee7b7}
+  .col ul{list-style:none}
+  .col li{padding:7px 0;color:var(--muted);font-size:14.5px;border-top:1px solid rgba(255,255,255,.05)}
+  .col li:first-child{border-top:none}
+
+  /* Install */
+  .install{background:#050409;border:1px solid var(--line);border-radius:14px;padding:22px 24px;overflow-x:auto}
+  .install pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#cbd5e1;line-height:1.9}
+  .install .c{color:var(--dim)}
+  .install .cmd{color:var(--amber-bright)}
+  .note{color:var(--dim);font-size:13.5px;margin-top:14px}
+  .badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--amber);
+    border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin-bottom:18px;text-transform:uppercase}
+
+  /* Governance */
+  .gates{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .gate{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text)}
+  .gate span{color:var(--amber);font-weight:700;margin-right:6px}
+
+  /* Footer */
+  footer{padding:60px 0 50px;text-align:center;border-top:1px solid rgba(245,158,11,.1)}
+  footer .quote{font-size:18px;font-weight:600;color:var(--text);max-width:640px;margin:0 auto 22px}
+  footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:18px}
+  footer .links a:hover{color:var(--amber-bright)}
+  footer .attrib{color:var(--dim);font-size:13px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand fire-text">AI FORGING</div>
+    <div class="navlinks">
+      <a href="#why">The Why</a>
+      <a href="#how">The Method</a>
+      <a href="#movement">The Movement</a>
+      <a href="#plugin">The Plugin</a>
+      <a class="ghlink" href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">A question for AI-assisted developers</div>
+    <h1 class="fire-text">AI FORGING</h1>
+    <h2 class="tagline">The counterpoint to vibe coding.</h2>
+    <p class="lede">What if your codebase is getting <b>worse with every feature you ship?</b> Vibe coding hopes the AI got it right. AI Forging <b>proves it did — then makes it stronger.</b> A discipline for turning AI-assisted development into compounding quality.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">Get the open-source plugin</a>
+      <a class="btn btn-ghost" href="#why">Read the philosophy</a>
+    </div>
+  </div>
+</header>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <div class="eyebrow">Layer 1 — The Why</div>
+    <h2>Speed got cheap. Quality didn't.</h2>
+    <p class="section-lede">AI makes producing code nearly free. Without structure, every feature shipped makes the codebase worse — and eventually the AI itself starts hallucinating against the mess it helped create. This is the problem worth solving, and it outlives any single tool.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Quality drift compounds</h3>
+        <p>AI output silently diverges from your conventions. Small drift today becomes structural debt in six months — hidden behind a green CI badge.</p>
+      </div>
+      <div class="card">
+        <h3>Velocity masks debt</h3>
+        <p>Features ship fast while the codebase rots underneath. The rework cycle begins invisibly, then velocity collapses.</p>
+      </div>
+      <div class="card">
+        <h3>Knowledge evaporates</h3>
+        <p>Hard-won decisions live in chat transcripts and individuals' heads. Nothing is codified. Turnover resets the clock.</p>
+      </div>
+      <div class="card">
+        <h3>No audit trail</h3>
+        <p>No record of what was built, why, or by whose approval. Governance and regulatory blind spots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE LAYERS -->
+<section id="layers">
+  <div class="wrap">
+    <div class="eyebrow">The idea</div>
+    <h2>AI Forging is layered.</h2>
+    <p class="section-lede">It isn't a single tool. It's a philosophy, a methodology that serves it, and a concrete implementation of that methodology — three layers with very different lifecycles.</p>
+    <div class="layer">
+      <div class="num">1</div>
+      <div>
+        <div class="role">The Why — Philosophy</div>
+        <h3>The problems worth solving</h3>
+        <p>What goes wrong when we build with agentic AI, and why quality has to compound instead of decay. Tool-agnostic and the part that endures longest.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="num">2</div>
+      <div>
+        <div class="role">The How — Methodology</div>
+        <h3>One way to solve them</h3>
+        <p>Spec → plan → test-first execution → refactoring in isolated sub-agents → knowledge captured so it scales. Framed as one approach, not the only one — others are welcome.</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="num">3</div>
+      <div>
+        <div class="role">The Implementation — Open Source</div>
+        <h3>A tool that runs the method</h3>
+        <p>The open-source Claude Code plugin — with strong, opinionated bets on architecture. One implementation of the methodology. You could disagree with every opinion and still hold the philosophy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW / three stages -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">Layer 2 — The Method</div>
+    <h2>Fire. Hammer. Tempering.</h2>
+    <p class="section-lede">A metallurgy metaphor: raw material becomes stronger through structured transformation — not by hoping for the best. Each pass through the forge leaves the codebase stronger than it started.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="stage">Fire</div>
+        <h3>Test before you code</h3>
+        <p>AI-powered TDD. Tests capture intent before a line of implementation exists — the double-entry accounting of software.</p>
+        <p class="punch">Intent, verified — not eyeballed.</p>
+      </div>
+      <div class="card">
+        <div class="stage">Hammer</div>
+        <h3>Refactor against patterns</h3>
+        <p>After the tests pass, one fresh-context sub-agent per pattern reworks just the changed code — in parallel, no drift, no fatigue.</p>
+        <p class="punch">Consistency without human fatigue.</p>
+      </div>
+      <div class="card">
+        <div class="stage">Tempering</div>
+        <h3>Capture knowledge that scales</h3>
+        <p>One correction, one pattern file. Adding the 50th costs no more than the 5th. No monolith, no context ceiling.</p>
+        <p class="punch">The system gets smarter, not heavier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Governance -->
+<section id="governance">
+  <div class="wrap">
+    <div class="eyebrow">Governance</div>
+    <h2>AI Forges. Humans decide.</h2>
+    <p class="section-lede">Nothing autonomous, nothing silent. Every proposal passes a human gate before it merges.</p>
+    <div class="gates">
+      <div class="gate"><span>1</span>Test review &amp; approval</div>
+      <div class="gate"><span>2</span>Code review at the PR</div>
+      <div class="gate"><span>3</span>Architecture decisions</div>
+      <div class="gate"><span>4</span>Deployment authorization</div>
+    </div>
+  </div>
+</section>
+
+<!-- Movement -->
+<section id="movement">
+  <div class="wrap">
+    <div class="eyebrow">The Movement</div>
+    <h2>One philosophy. Many ways to live it.</h2>
+    <p class="section-lede">The most important layer is the Why, and it belongs to everyone. The methodology below it is one route through the problem — yours might be better. The plugin is one implementation — there could be others, for other tools, stacks, and architectures. Take the ideas, build your own, and share what you learn.</p>
+    <div class="contrast">
+      <div class="col vibe">
+        <h3>Vibe Coding</h3>
+        <ul>
+          <li>Prompt → hope → ship</li>
+          <li>Quality is a snapshot</li>
+          <li>Knowledge lives in the chat history</li>
+          <li>Best practices are whatever the AI recalls</li>
+          <li>Works until it doesn't</li>
+        </ul>
+      </div>
+      <div class="col forge">
+        <h3>AI Forging</h3>
+        <ul>
+          <li>Specify → prove → capture</li>
+          <li>Quality compounds every cycle</li>
+          <li>Knowledge lives in reusable files</li>
+          <li>Best practices enforced automatically</li>
+          <li>Each piece makes the next one better</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plugin -->
+<section id="plugin">
+  <div class="wrap">
+    <div class="eyebrow">Layer 3 — The Implementation</div>
+    <span class="badge">Open source · Claude Code plugin · v0.2.0</span>
+    <h2>Install the reference implementation.</h2>
+    <p class="section-lede">A Claude Code plugin that runs the whole method — spec, TDD, pattern-driven refactoring, knowledge capture — with opinionated, domain-driven architecture on top. Built for established codebases that already feel the AI-generated sprawl. Prescriptive on purpose.</p>
+    <div class="install">
+      <pre><span class="c"># Install superpowers (the TDD + sub-agent foundation)</span>
+<span class="cmd">/plugin marketplace add</span> obra/superpowers
+<span class="cmd">/plugin install</span> superpowers@superpowers-dev
+
+<span class="c"># Install AI Forging</span>
+<span class="cmd">/plugin marketplace add</span> aiforging/aiforging
+<span class="cmd">/plugin install</span> aiforging@aiforging
+
+<span class="c"># Then bootstrap a workspace</span>
+<span class="cmd">/aiforging:setup</span></pre>
+    </div>
+    <p class="note">Symfony / PHP / Doctrine is the happy path today; other stacks work to the degree the conventions apply. Research preview — try it on something real and open an issue about what broke.</p>
+    <div class="cta-row" style="justify-content:flex-start;margin-top:26px">
+      <a class="btn btn-primary" href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">View on GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/aiforging/aiforging#readme" target="_blank" rel="noopener">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="quote">Vibe-coded software works until it doesn't.<br><span class="amber">Forged software was built to last.</span></p>
+    <div class="links">
+      <a href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/chrisholland" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://aiforging.dev">aiforging.dev</a>
+    </div>
+    <p class="attrib">Created by Chris Holland · 30 years in Software Engineering</p>
+  </div>
+</footer>
+
+</body>
+</html>
