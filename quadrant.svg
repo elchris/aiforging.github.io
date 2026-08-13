@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" font-family="'Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#07060a"/><stop offset="1" stop-color="#100e18"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#dc2626"/><stop offset=".45" stop-color="#f59e0b"/><stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <radialGradient id="forgeGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity=".16"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+  <ellipse cx="886" cy="370" rx="380" ry="300" fill="url(#forgeGlow)"/>
+
+  <!-- Title -->
+  <text x="600" y="60" text-anchor="middle" fill="#64748b" font-size="15" font-weight="600" letter-spacing="5">A MAP FOR AGENTIC SOFTWARE DEVELOPMENT</text>
+  <text x="600" y="118" text-anchor="middle" fill="url(#fire)" font-size="44" font-weight="800" letter-spacing="1" filter="url(#glow)">Where does your AI workflow live?</text>
+
+  <!-- Axis arrows -->
+  <line x1="105" y1="925" x2="105" y2="206" stroke="#f59e0b" stroke-width="2" opacity=".55"/>
+  <polygon points="105,196 99,210 111,210" fill="#f59e0b" opacity=".7"/>
+  <text x="60" y="565" text-anchor="middle" fill="#94a3b8" font-size="17" font-weight="700" letter-spacing="3" transform="rotate(-90 60 565)">DISCIPLINE</text>
+  <text x="142" y="214" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600">high</text>
+  <text x="142" y="922" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600">low</text>
+
+  <line x1="176" y1="955" x2="1101" y2="955" stroke="#f59e0b" stroke-width="2" opacity=".55"/>
+  <polygon points="1111,955 1097,949 1097,961" fill="#f59e0b" opacity=".7"/>
+  <text x="600" y="985" text-anchor="middle" fill="#94a3b8" font-size="17" font-weight="700" letter-spacing="3">AUTONOMY</text>
+  <text x="196" y="945" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600">low</text>
+  <text x="1082" y="945" text-anchor="middle" fill="#64748b" font-size="12" font-weight="600">high</text>
+
+  <!-- Top-left: Disciplined AI-Assist -->
+  <rect x="165" y="195" width="458" height="350" rx="14" fill="#0d0f15" stroke="#5b6b7a" stroke-width="1.2" stroke-opacity=".5"/>
+  <text x="193" y="235" fill="#7b8794" font-size="12.5" font-weight="700" letter-spacing="1.5">HIGH DISCIPLINE · LOW AUTONOMY</text>
+  <text x="193" y="286" fill="#cbd5e1" font-size="29" font-weight="800">Disciplined AI-Assist</text>
+  <text x="193" y="330" fill="#94a3b8" font-size="16.5">An engineer steers every step.</text>
+  <text x="193" y="356" fill="#94a3b8" font-size="16.5">Spec'd and tested — but small chunks.</text>
+  <text x="193" y="512" fill="#86b8a0" font-size="16" font-style="italic">Safe — but limited leverage.</text>
+
+  <!-- Top-right: AI FORGING (highlighted) -->
+  <rect x="657" y="195" width="458" height="350" rx="14" fill="#140d03" stroke="#f59e0b" stroke-width="2.5"/>
+  <rect x="657" y="195" width="458" height="350" rx="14" fill="url(#forgeGlow)"/>
+  <text x="685" y="235" fill="#d9a441" font-size="12.5" font-weight="700" letter-spacing="1.5">HIGH DISCIPLINE · HIGH AUTONOMY</text>
+  <text x="1087" y="232" text-anchor="end" fill="#fbbf24" font-size="12.5" font-weight="800" letter-spacing="1">★ THE GOAL</text>
+  <text x="685" y="290" fill="#fbbf24" font-size="34" font-weight="800" letter-spacing="1">AI FORGING</text>
+  <text x="685" y="336" fill="#cbd5e1" font-size="16.5">Whole units of work, forged: spec →</text>
+  <text x="685" y="362" fill="#cbd5e1" font-size="16.5">test → refactor → capture. Humans</text>
+  <text x="685" y="388" fill="#cbd5e1" font-size="16.5">on every gate.</text>
+  <text x="685" y="512" fill="#fbbf24" font-size="16.5" font-weight="600" font-style="italic">Quality + velocity, compounding.</text>
+
+  <!-- Bottom-left: Vibe Coding -->
+  <rect x="165" y="580" width="458" height="350" rx="14" fill="#120a0a" stroke="#dc2626" stroke-width="1.2" stroke-opacity=".32"/>
+  <text x="193" y="620" fill="#a56b6b" font-size="12.5" font-weight="700" letter-spacing="1.5">LOW DISCIPLINE · LOW AUTONOMY</text>
+  <text x="193" y="671" fill="#e2e8f0" font-size="29" font-weight="800">Vibe Coding</text>
+  <text x="193" y="715" fill="#94a3b8" font-size="16.5">Prompt → hope → ship.</text>
+  <text x="193" y="741" fill="#94a3b8" font-size="16.5">Small steps, low scrutiny.</text>
+  <text x="193" y="898" fill="#fca5a5" font-size="16" font-style="italic">Works until it doesn't.</text>
+
+  <!-- Bottom-right: Agentic Vibe Coding -->
+  <rect x="657" y="580" width="458" height="350" rx="14" fill="#160a0a" stroke="#dc2626" stroke-width="1.5" stroke-opacity=".55"/>
+  <text x="685" y="620" fill="#c07070" font-size="12.5" font-weight="700" letter-spacing="1.5">LOW DISCIPLINE · HIGH AUTONOMY</text>
+  <text x="685" y="671" fill="#e2e8f0" font-size="29" font-weight="800">Agentic Vibe Coding</text>
+  <text x="685" y="715" fill="#94a3b8" font-size="16.5">Point an agent at "build me X"</text>
+  <text x="685" y="741" fill="#94a3b8" font-size="16.5">and let it run — unread.</text>
+  <text x="685" y="898" fill="#fca5a5" font-size="16" font-style="italic">Spectacular demos. Debt bombs.</text>
+
+  <!-- Footer -->
+  <text x="600" y="1050" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="700">Going agentic is easy.</text>
+  <text x="600" y="1083" text-anchor="middle" fill="#fbbf24" font-size="22" font-weight="700">Going agentic without wrecking quality is the hard part — that's AI Forging.</text>
+  <text x="600" y="1136" text-anchor="middle" fill="#64748b" font-size="14" letter-spacing="1">aiforging.dev · the counterpoint to vibe coding</text>
+</svg>
