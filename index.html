@@ -70,6 +70,25 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Can I use AI Forging today?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AI Forging ships as an open-source Claude Code plugin — install it and run /aiforging:setup to bootstrap a workspace. It's a v0.2.0 research preview, and the principles apply even if you never install a thing." } },
+    { "@type": "Question", "name": "Isn't this just TDD with a brand on it?", "acceptedAnswer": { "@type": "Answer", "text": "TDD is one of three stages — the Fire. Alone, it proves today's code works; it doesn't capture patterns, automate refactoring against them, or compound quality across sessions. Fire, Hammer, Tempering is a flywheel where each pass makes the next one better." } },
+    { "@type": "Question", "name": "Why write the test first instead of letting the AI add tests afterward?", "acceptedAnswer": { "@type": "Answer", "text": "Because order changes what the test measures. Write it first and its job is: does this match the intended outcome? The code has to earn a passing test. Write it after and its job collapses to: does this match the code I already wrote? It certifies whatever the AI produced, intent or not. Test-after locks in behavior; test-first locks in intent." } },
+    { "@type": "Question", "name": "I already add lessons to a big CLAUDE.md. Isn't that the same thing?", "acceptedAnswer": { "@type": "Answer", "text": "A single instruction file hits a ceiling — context fills up, signal drowns in noise, and the AI starts ignoring half your rules. AI Forging uses one file per pattern, each reviewed by a fresh-context agent. The 50th pattern costs no more than the 5th. A list versus an architecture." } },
+    { "@type": "Question", "name": "Isn't this just good engineering with a fancy name?", "acceptedAnswer": { "@type": "Answer", "text": "Good principles, yes — but the AI-orchestration layer is new: bounded-context sub-agents, automated pattern enforcement, and post-TDD loops that check every changed file against every known pattern. Good engineering is a value; AI Forging is a system, and a system needs a name to spread." } },
+    { "@type": "Question", "name": "Vibe coding works fine for my projects. Why change?", "acceptedAnswer": { "@type": "Answer", "text": "For prototypes and throwaway scripts, it does — that's not the problem this solves. For production systems that outlive team changes and compound over years, vibe coding has no answer. This is what comes after it, when the code has to last." } },
+    { "@type": "Question", "name": "Aren't you just coining a term to get famous?", "acceptedAnswer": { "@type": "Answer", "text": "The system exists and runs across several production codebases today — patterns, anti-patterns, test suites, sub-agent orchestration, real working code. It draws on 30 years of engineering and daily AI-assisted development since 2023. The name just lets it be taught, shared, and improved." } },
+    { "@type": "Question", "name": "Won't this be obsolete in six months as AI improves?", "acceptedAnswer": { "@type": "Answer", "text": "More powerful AI without guardrails just means bad code faster. Structure matters more as models improve, not less. The forge cycle is model-agnostic — as the AI gets better, the Fire burns hotter and the patterns get richer. It rides the models; it doesn't compete with them." } },
+    { "@type": "Question", "name": "This is too heavyweight. I just need to ship.", "acceptedAnswer": { "@type": "Answer", "text": "The old knock on rigor was that it's too slow. AI changed that: the AI runs the test-first cycles, the refactoring, and the pattern review. You define intent. Doing more means doing better — not doing slower." } },
+    { "@type": "Question", "name": "Where's the proof? Show me metrics.", "acceptedAnswer": { "@type": "Answer", "text": "The proof is structural. Several production codebases — frontend, backend, and more — orchestrated through one framework, with growing pattern libraries, independent test suites, and anti-pattern files that stop the same mistake twice. It's a working system, not a whitepaper." } }
+  ]
+}
+</script>
+
 <style>
   :root{
     --bg0:#07060a; --bg1:#100e18; --card:#0f0a04;
@@ -179,6 +198,12 @@
   footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:18px}
   footer .links a:hover{color:var(--amber-bright)}
   footer .attrib{color:var(--dim);font-size:13px}
+
+  /* FAQ */
+  #faq .faq-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:14px}
+  #faq .faq-q{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px}
+  #faq .faq-a{font-size:15px;color:var(--muted)}
+  #faq .faq-a code{color:var(--amber-bright);font-size:13.5px}
 </style>
 </head>
 <body>
@@ -192,6 +217,7 @@
       <a href="#how">The Method</a>
       <a href="#movement">The Movement</a>
       <a href="#plugin">The Plugin</a>
+      <a href="#faq">FAQ</a>
       <a class="ghlink" href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
@@ -381,6 +407,65 @@
     <div class="cta-row" style="justify-content:flex-start;margin-top:26px">
       <a class="btn btn-primary" href="https://github.com/aiforging/aiforging" target="_blank" rel="noopener">View on GitHub</a>
       <a class="btn btn-ghost" href="https://github.com/aiforging/aiforging#readme" target="_blank" rel="noopener">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2>Hard questions. Honest answers.</h2>
+    <p class="section-lede">Every new idea meets skepticism. Here are the objections we hear most — and the answers, backed by a working system.</p>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I use it today?</div>
+      <div class="faq-a">Yes. AI Forging ships as an open-source Claude Code plugin — install it and run <code>/aiforging:setup</code> to bootstrap a workspace. It's a v0.2.0 research preview, and the principles apply even if you never install a thing.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Isn't this just TDD with a brand on it?</div>
+      <div class="faq-a">TDD is one of three stages — the Fire. Alone, it proves today's code works; it doesn't capture patterns, automate refactoring against them, or compound quality across sessions. Fire → Hammer → Tempering is a flywheel where each pass makes the next one better.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why write the test first — can't the AI just add tests afterward?</div>
+      <div class="faq-a">Because order changes what the test measures. First, and its job is "does this match the intended outcome?" — the code has to earn a passing test. After, and its job collapses to "does this match the code I already wrote?" — it certifies whatever the AI produced, intent or not. Test-after locks in behavior; test-first locks in intent. That's the difference between a test that catches a wrong feature and one that rubber-stamps it.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I already add lessons to a big CLAUDE.md. Same thing?</div>
+      <div class="faq-a">A single instruction file hits a ceiling — context fills up, signal drowns in noise, and the AI starts ignoring half your rules. AI Forging uses one file per pattern, each reviewed by a fresh-context agent. The 50th pattern costs no more than the 5th. A list versus an architecture.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Isn't this just good engineering with a fancy name?</div>
+      <div class="faq-a">Good principles, yes — but the AI-orchestration layer is new: bounded-context sub-agents, automated pattern enforcement, post-TDD loops that check every changed file against every known pattern. Good engineering is a value; AI Forging is a system, and a system needs a name to spread.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Vibe coding works fine for my projects.</div>
+      <div class="faq-a">For prototypes and throwaway scripts, it does — that's not the problem this solves. For production systems that outlive team changes and compound over years, vibe coding has no answer. This is what comes after it, when the code has to last.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Aren't you just coining a term to get famous?</div>
+      <div class="faq-a">The system exists and runs across several production codebases today — patterns, anti-patterns, test suites, sub-agent orchestration, real working code. It draws on 30 years of engineering and daily AI-assisted development since 2023. The name just lets it be taught, shared, and improved.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Won't this be obsolete in six months as AI improves?</div>
+      <div class="faq-a">More powerful AI without guardrails just means bad code faster. Structure matters more as models improve, not less. The forge cycle is model-agnostic — as the AI gets better, the Fire burns hotter and the patterns get richer. It rides the models; it doesn't compete with them.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">This is too heavyweight. I just need to ship.</div>
+      <div class="faq-a">The old knock on rigor was "it's too slow." AI changed that: the AI runs the test-first cycles, the refactoring, and the pattern review. You define intent. Doing more means doing better — not doing slower.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Where's the proof? Show me metrics.</div>
+      <div class="faq-a">The proof is structural. Several production codebases — frontend, backend, and more — orchestrated through one framework, with growing pattern libraries, independent test suites, and anti-pattern files that stop the same mistake twice. It's a working system, not a whitepaper.</div>
     </div>
   </div>
 </section>
