@@ -85,6 +85,8 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "Can I use AI Forging today?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AI Forging ships as an open-source Claude Code plugin — install it and run /aiforging:setup to bootstrap a workspace. It's at v0.4.0, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing." } },
+    { "@type": "Question", "name": "Does this work for a team, or is it really a one-person thing?", "acceptedAnswer": { "@type": "Answer", "text": "It is built for teams, and that is the part most AI workflows skip. The forge workspace is a git repository your whole team clones \u2014 every feature's spec, plan, QA checklist and review record lives in it. One engineer starts a feature; anyone can pick it up. When a reviewer catches the AI doing something less than ideal, they capture it as a pattern file and every engineer's next feature is checked against it. It works solo too. It just works for one person, and the specs stop being useful the week that person is out." } },
+    { "@type": "Question", "name": "Does every engineer have to be full-stack for this to work?", "acceptedAnswer": { "@type": "Answer", "text": "In practice, one engineer owning a feature end to end \u2014 front-end and back-end \u2014 works better than splitting it between two specialists, and the framework is shaped for that. The AI writes the code; the guardrails are what make it reasonable for one person to review across the whole stack. It also removes the coordination cost that used to justify the split. Depth still matters: your strongest reviewer in an area reviews those pull requests more closely \u2014 and captures what they catch, so their expertise reaches everyone's next feature instead of staying in that one review." } },
     { "@type": "Question", "name": "Isn't this just TDD with a brand on it?", "acceptedAnswer": { "@type": "Answer", "text": "TDD is one of three stages — the Fire. Alone, it proves today's code works; it doesn't capture patterns, automate refactoring against them, or compound quality across sessions. Fire, Hammer, Tempering is a flywheel where each pass makes the next one better." } },
     { "@type": "Question", "name": "Why write the test first instead of letting the AI add tests afterward?", "acceptedAnswer": { "@type": "Answer", "text": "Because order changes what the test measures. Write the test first, and its job is to answer: does this match the intended outcome? The code then has to earn a passing test. Write it after, and its job quietly shrinks to: does this match the code I already wrote? Now it just certifies whatever the AI produced, intent or not. Test-after locks in behavior; test-first locks in intent — the difference between a test that catches a wrong feature and one that rubber-stamps it." } },
     { "@type": "Question", "name": "I already add lessons to a big CLAUDE.md. Isn't that the same thing?", "acceptedAnswer": { "@type": "Answer", "text": "A single instruction file hits a ceiling — context fills up, signal drowns in noise, and the AI starts ignoring half your rules. AI Forging uses one file per pattern, each reviewed by a fresh-context agent. The 50th pattern costs no more than the 5th. A list versus an architecture." } },
@@ -173,6 +175,22 @@
   .sub-lede{color:var(--muted);max-width:680px;font-size:15.5px;margin-bottom:22px}
   .handoff{margin-top:24px;border-left:3px solid var(--amber);background:rgba(245,158,11,.06);border-radius:0 10px 10px 0;padding:16px 20px;color:var(--muted);font-size:14.5px}
   .handoff b{color:var(--text)}
+  .scenario{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+  .scenario .when{color:var(--amber);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  .scenario h3{font-size:18px;font-weight:800;margin-bottom:10px;letter-spacing:.3px;line-height:1.35}
+  .scenario p{color:var(--muted);font-size:14.5px}
+  .scenario p+p{margin-top:10px}
+  .bigpoint{margin-top:34px;border:1px solid var(--line);border-radius:14px;padding:28px 30px;
+    background:linear-gradient(180deg,rgba(245,158,11,.07),rgba(245,158,11,.02))}
+  .bigpoint h3{font-size:21px;font-weight:800;margin-bottom:12px;color:var(--text)}
+  .bigpoint p{color:var(--muted);font-size:15.5px}
+  .bigpoint p+p{margin-top:12px}
+  .bigpoint .quote{color:var(--dim);font-style:italic}
+  .bigpoint b{color:var(--text)}
+  .flow{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .flow code{background:#050409;border:1px solid var(--line);border-radius:8px;padding:9px 14px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:var(--amber-bright)}
+  .flow span{color:var(--dim);font-size:13px;align-self:center}
 
   /* Layers */
   .layer{display:flex;gap:22px;align-items:flex-start;padding:22px 0;border-bottom:1px solid rgba(245,158,11,.08)}
@@ -232,6 +250,7 @@
       <a href="#map">The Map</a>
       <a href="#why">The Why</a>
       <a href="#how">The Method</a>
+      <a href="#teams">For Teams</a>
       <a href="#movement">The Movement</a>
       <a href="#plugin">The Plugin</a>
       <a href="#faq">FAQ</a>
@@ -376,6 +395,50 @@
   </div>
 </section>
 
+<!-- For Teams -->
+<section id="teams">
+  <div class="wrap">
+    <div class="eyebrow">For Teams</div>
+    <h2>One engineer forges. Anyone can pick it up.</h2>
+    <p class="section-lede">Every feature's spec, plan, QA checklist and review record lives in a <b>forge workspace</b> — a git repository your whole team clones. That single decision is what turns a personal AI workflow into a team one.</p>
+
+    <div class="grid grid-3">
+      <div class="scenario">
+        <div class="when">Next week</div>
+        <h3>Someone goes on vacation mid-feature</h3>
+        <p>They're three work items in and gone for a week. A teammate opens the same feature folder and gets what's done, what's next, what was deliberately deferred, and every finding still open.</p>
+        <p>No handover meeting. No archaeology.</p>
+      </div>
+      <div class="scenario">
+        <div class="when">Three months later</div>
+        <h3>You need to extend what your AI built in March</h3>
+        <p>Point it at the feature folder. It reads the specs — the business intent <em>and</em> the engineering intent, written down at the time by the people who decided them.</p>
+        <p>It doesn't have to guess. That distinction gets bigger every month.</p>
+      </div>
+      <div class="scenario">
+        <div class="when">Every pull request</div>
+        <h3>One review, and everyone's next feature is better</h3>
+        <p>Your sharpest reviewer catches the AI doing something less than ideal and captures it as a pattern file — one correction, one file.</p>
+        <p>Every engineer's next feature is checked against it. Expertise stops being trapped in the pull request where it happened.</p>
+      </div>
+    </div>
+
+    <div class="bigpoint">
+      <h3>The alternative is asking your AI to reverse-engineer your own intent.</h3>
+      <p class="quote">"The code for this lives roughly in these folders. It currently does A, B and C. Now I'd like it to do X."</p>
+      <p>That's the usual way to reopen an old feature, and it asks the AI to reconstruct <b>why</b> from <b>what</b>. It's tedious, it's error-prone, and the blind spots it produces are large and quiet — you don't find out what it misunderstood until the change ships.</p>
+      <p>A feature folder hands it the reasoning directly. <b>That's the difference between an AI that understands your feature and one that has inferred a plausible story about it.</b></p>
+    </div>
+
+    <p class="section-lede" style="margin-top:34px;margin-bottom:0">Three commands carry it: one to start a feature, one to pick up any feature — yours or a teammate's — and one that wires a freshly cloned workspace to a new engineer's machine.</p>
+    <div class="flow">
+      <code>/aiforging:forge</code><span>start something new</span>
+      <code>/aiforging:resume</code><span>pick up anything</span>
+      <code>/aiforging:join</code><span>onboard a teammate</span>
+    </div>
+  </div>
+</section>
+
 <!-- Governance -->
 <section id="governance">
   <div class="wrap">
@@ -466,6 +529,16 @@
     <div class="faq-item">
       <div class="faq-q">Can I use it today?</div>
       <div class="faq-a">Yes. AI Forging ships as an open-source Claude Code plugin — install it and run <code>/aiforging:setup</code> to bootstrap a workspace. It's at v0.4.0, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does this work for a team, or is it really a one-person thing?</div>
+      <div class="faq-a">It's built for teams, and that's the part most AI workflows skip. The forge workspace is a git repository your whole team clones — every feature's spec, plan, QA checklist and review record lives in it. One engineer starts a feature; anyone can pick it up with <code>/aiforging:resume</code>. When a reviewer catches the AI doing something less than ideal, they capture it as a pattern file and every engineer's next feature is checked against it. It works solo too — it just works for one person, and the specs stop being useful the week that person is out.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does every engineer have to be full-stack for this to work?</div>
+      <div class="faq-a">In practice, one engineer owning a feature end to end — front-end and back-end — works better than splitting it between two specialists, and the framework is shaped for that. The AI writes the code; the guardrails are what make it reasonable for one person to review across the whole stack, and it removes the coordination cost that used to justify the split. Depth still matters: your strongest reviewer in an area reviews those pull requests more closely — and captures what they catch, so their expertise reaches everyone's next feature instead of staying in that one review.</div>
     </div>
 
     <div class="faq-item">
