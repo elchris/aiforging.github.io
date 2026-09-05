@@ -68,7 +68,7 @@
       "name": "AI Forging",
       "operatingSystem": "Claude Code",
       "applicationCategory": "DeveloperApplication",
-      "softwareVersion": "0.3.1",
+      "softwareVersion": "0.4.0",
       "url": "https://github.com/aiforging/aiforging",
       "description": "An open-source Claude Code plugin that runs the AI Forging methodology: test-first development with one scoped test suite per feature, pattern-driven refactoring, scalable knowledge capture, and two optional post-implementation stages — browser testing against a human QA checklist, and a review/triage/fix loop.",
       "author": { "@id": "https://aiforging.dev/#person" },
@@ -84,7 +84,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    { "@type": "Question", "name": "Can I use AI Forging today?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AI Forging ships as an open-source Claude Code plugin — install it and run /aiforging:setup to bootstrap a workspace. It's at v0.3.1, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing." } },
+    { "@type": "Question", "name": "Can I use AI Forging today?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AI Forging ships as an open-source Claude Code plugin — install it and run /aiforging:setup to bootstrap a workspace. It's at v0.4.0, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing." } },
     { "@type": "Question", "name": "Isn't this just TDD with a brand on it?", "acceptedAnswer": { "@type": "Answer", "text": "TDD is one of three stages — the Fire. Alone, it proves today's code works; it doesn't capture patterns, automate refactoring against them, or compound quality across sessions. Fire, Hammer, Tempering is a flywheel where each pass makes the next one better." } },
     { "@type": "Question", "name": "Why write the test first instead of letting the AI add tests afterward?", "acceptedAnswer": { "@type": "Answer", "text": "Because order changes what the test measures. Write the test first, and its job is to answer: does this match the intended outcome? The code then has to earn a passing test. Write it after, and its job quietly shrinks to: does this match the code I already wrote? Now it just certifies whatever the AI produced, intent or not. Test-after locks in behavior; test-first locks in intent — the difference between a test that catches a wrong feature and one that rubber-stamps it." } },
     { "@type": "Question", "name": "I already add lessons to a big CLAUDE.md. Isn't that the same thing?", "acceptedAnswer": { "@type": "Answer", "text": "A single instruction file hits a ceiling — context fills up, signal drowns in noise, and the AI starts ignoring half your rules. AI Forging uses one file per pattern, each reviewed by a fresh-context agent. The 50th pattern costs no more than the 5th. A list versus an architecture." } },
@@ -426,7 +426,7 @@
 <section id="plugin">
   <div class="wrap">
     <div class="eyebrow">Layer 3 — The Implementation</div>
-    <span class="badge">Open source · Claude Code plugin · v0.3.1</span>
+    <span class="badge">Open source · Claude Code plugin · v0.4.0</span>
     <h2>Install the reference implementation.</h2>
     <p class="section-lede">A Claude Code plugin that runs the whole method — spec, TDD, pattern-driven refactoring, knowledge capture, and the two optional verification stages — with opinionated, domain-driven architecture on top. Built for established codebases that already feel the AI-generated sprawl. Prescriptive on purpose.</p>
     <div class="install">
@@ -465,7 +465,7 @@
 
     <div class="faq-item">
       <div class="faq-q">Can I use it today?</div>
-      <div class="faq-a">Yes. AI Forging ships as an open-source Claude Code plugin — install it and run <code>/aiforging:setup</code> to bootstrap a workspace. It's at v0.3.1, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing.</div>
+      <div class="faq-a">Yes. AI Forging ships as an open-source Claude Code plugin — install it and run <code>/aiforging:setup</code> to bootstrap a workspace. It's at v0.4.0, MIT licensed, and running against real production codebases — and the principles apply even if you never install a thing.</div>
     </div>
 
     <div class="faq-item">
